@@ -37,3 +37,10 @@ test:
   database: ventana-properties-api_test
   pool: 5
   timeout: 5000
+
+production:
+    adapter: postgresql
+    encoding: unicode
+    database: ventana-properties-api_production
+    pool: 5
+    timeout: 5000

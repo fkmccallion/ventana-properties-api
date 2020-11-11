@@ -2,7 +2,8 @@ class AgentsController < ApplicationController
 
   def index
     agents = Agent.all
-    render json: AgentSerializer.new(agents).to_serialized_json
+    shownAgents = agents.select { |a| a.show == true }
+    render json: AgentSerializer.new(shownAgents).to_serialized_json
   end
 
   def show
@@ -24,7 +25,9 @@ class AgentsController < ApplicationController
 
   def destroy
     agent = Agent.find_by(id: params[:id])
-    agent.destroy
+    agent.show = false
+    agent.save
+    #agent.destroy
     render json: AgentSerializer.new(agent).to_serialized_json
   end
 
